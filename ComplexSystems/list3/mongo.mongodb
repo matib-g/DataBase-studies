@@ -1,0 +1,239 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('MongoMusic');
+
+//3
+/*
+db.bands.insertMany([
+  {'Id' : 205, 'name' : 'RockWroclaw', 'noAlbums' : 0, 'origin':{'street' : 'Grunwaldzka 22', 'City' : 'Wrocław', 'State' : 'Dolnoslaskie', 'Country' : 'Poland'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Wojciech', 'SecondName' : 'Kowalski'},{'FirstName' : 'Janusz', 'SecondName' : 'Wojciechowski'}]},
+{'Id' : 207, 'name' : 'NewPopYork', 'noAlbums' : 0, 'origin':{'street' : '20 W 34th Street', 'City' : 'New York', 'State' : 'New York', 'Country' : 'USA'}, 
+  'members':[{'FirstName' : 'John', 'SecondName' : 'Krasinski'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'}]},
+{'Id' : 208, 'name' : 'LondonBlues', 'noAlbums' : 0, 'origin':{'street' : '10 Downing Street', 'City' : 'London', 'State' : 'Greater London', 'Country' : 'Great Britain'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Paul', 'SecondName' : 'Whitman'},{'FirstName' : 'Tom', 'SecondName' : 'Williams'},{'FirstName' : 'Harry', 'SecondName' : 'Davies'}]},
+{'Id' : 209, 'name' : 'ClassicalParis', 'noAlbums' : 0, 'origin':{'street' : '5 Av. Anatole France', 'City' : 'Paris', 'State' : 'lle-de-France', 'Country' : 'France'}, 
+  'members':[{'FirstName' : 'Paul', 'SecondName' : 'Williams'}, {'FirstName' : 'Micheal', 'SecondName' : 'Scott'},{'FirstName' : 'Brian', 'SecondName' : 'Miller'},{'FirstName' : 'Erin', 'SecondName' : 'Brown'}]},
+{'Id' : 210, 'name' : 'HipHopBuenosAires', 'noAlbums' : 0, 'origin':{'street' : 'Aguero 2502', 'City' : 'Buenos Aires', 'State' : 'Buenos Aires', 'Country' : 'Brasil'}, 
+  'members':[{'FirstName' : 'Hugo', 'SecondName' : 'Barron'}, {'FirstName' : 'James', 'SecondName' : 'Smith'},{'FirstName' : 'Carlos', 'SecondName' : 'Scott'}]},
+{'Id' : 211, 'name' : 'TechnoCairo', 'noAlbums' : 0, 'origin':{'street' : 'El-Gomhoreya Square', 'City' : 'Cairo', 'State' : 'Cairo', 'Country' : 'Egypt'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'James', 'SecondName' : 'May'}]},
+{'Id' : 212, 'name' : 'TokyoJazz', 'noAlbums' : 0, 'origin':{'street' : '1 Chome-1-2 Oshiage', 'City' : 'Tokyo', 'State' : 'Tokyo', 'Country' : 'Japan'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Jason', 'SecondName' : 'Scoth'},{'FirstName' : 'Jason', 'SecondName' : 'James'}]}
+])
+*/
+
+//4
+/*db.albums.insertMany([
+    {'title': 'MongoRock', 'genre' : 'Rock', 'band' : {'Id' : 205, 'name' : 'RockWroclaw', 'noAlbums' : 0, 'origin':{'street' : 'Grunwaldzka 22', 'City' : 'Wrocław', 'State' : 'Dolnoslaskie', 'Country' : 'Poland'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Wojciech', 'SecondName' : 'Kowalski'},{'FirstName' : 'Janusz', 'SecondName' : 'Wojciechowski'}]}},
+    {'title': 'HeidiRock', 'genre' : 'Rock', 'band' : {'Id' : 205, 'name' : 'RockWroclaw', 'noAlbums' : 0, 'origin':{'street' : 'Grunwaldzka 22', 'City' : 'Wrocław', 'State' : 'Dolnoslaskie', 'Country' : 'Poland'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Wojciech', 'SecondName' : 'Kowalski'},{'FirstName' : 'Janusz', 'SecondName' : 'Wojciechowski'}]}},
+    {'title': 'MongoPop', 'genre' : 'Pop', 'band' : {'Id' : 207, 'name' : 'NewPopYork', 'noAlbums' : 0, 'origin':{'street' : '20 W 34th Street', 'City' : 'New York', 'State' : 'New York', 'Country' : 'USA'}, 
+  'members':[{'FirstName' : 'John', 'SecondName' : 'Krasinski'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'}]}},
+    {'title': 'HeidiPop', 'genre' : 'Pop', 'band' : {'Id' : 207, 'name' : 'NewPopYork', 'noAlbums' : 0, 'origin':{'street' : '20 W 34th Street', 'City' : 'New York', 'State' : 'New York', 'Country' : 'USA'}, 
+  'members':[{'FirstName' : 'John', 'SecondName' : 'Krasinski'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'}]}},
+    {'title': 'MongoBlues', 'genre' : 'Blues', 'band' : {'Id' : 208, 'name' : 'LondonBlues', 'noAlbums' : 0, 'origin':{'street' : '10 Downing Street', 'City' : 'London', 'State' : 'Greater London', 'Country' : 'Great Britain'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Paul', 'SecondName' : 'Whitman'},{'FirstName' : 'Tom', 'SecondName' : 'Williams'},{'FirstName' : 'Harry', 'SecondName' : 'Davies'}]}},
+    {'title': 'HeidiBlues', 'genre' : 'Blues', 'band' : {'Id' : 208, 'name' : 'LondonBlues', 'noAlbums' : 0, 'origin':{'street' : '10 Downing Street', 'City' : 'London', 'State' : 'Greater London', 'Country' : 'Great Britain'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Paul', 'SecondName' : 'Whitman'},{'FirstName' : 'Tom', 'SecondName' : 'Williams'},{'FirstName' : 'Harry', 'SecondName' : 'Davies'}]}},
+    {'title': 'MongoTechno', 'genre' : 'Techno', 'band' : {'Id' : 211, 'name' : 'TechnoCairo', 'noAlbums' : 0, 'origin':{'street' : 'El-Gomhoreya Square', 'City' : 'Cairo', 'State' : 'Cairo', 'Country' : 'Egypt'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'James', 'SecondName' : 'May'}]}},
+    {'title': 'HeidiTechno', 'genre' : 'Techno', 'band' : {'Id' : 211, 'name' : 'TechnoCairo', 'noAlbums' : 0, 'origin':{'street' : 'El-Gomhoreya Square', 'City' : 'Cairo', 'State' : 'Cairo', 'Country' : 'Egypt'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'James', 'SecondName' : 'May'}]}},
+    {'title': 'MongoJazz', 'genre' : 'Jazz', 'band' : {'Id' : 212, 'name' : 'TokyoJazz', 'noAlbums' : 0, 'origin':{'street' : '1 Chome-1-2 Oshiage', 'City' : 'Tokyo', 'State' : 'Tokyo', 'Country' : 'Japan'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Jason', 'SecondName' : 'Scoth'},{'FirstName' : 'Jason', 'SecondName' : 'James'}]}},
+    {'title': 'HeidiJazz', 'genre' : 'Jazz', 'band' : {'Id' : 212, 'name' : 'TokyoJazz', 'noAlbums' : 0, 'origin':{'street' : '1 Chome-1-2 Oshiage', 'City' : 'Tokyo', 'State' : 'Tokyo', 'Country' : 'Japan'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Jason', 'SecondName' : 'Scoth'},{'FirstName' : 'Jason', 'SecondName' : 'James'}]}}
+])*/
+
+//5
+/*
+for(i = 0; i < 30; i++)
+{
+  var albums = [{'title': 'MongoRock', 'genre' : 'Rock', 'band' : {'Id' : 205, 'name' : 'RockWroclaw', 'noAlbums' : 0, 'origin':{'street' : 'Grunwaldzka 22', 'City' : 'Wrocław', 'State' : 'Dolnoslaskie', 'Country' : 'Poland'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Wojciech', 'SecondName' : 'Kowalski'},{'FirstName' : 'Janusz', 'SecondName' : 'Wojciechowski'}]}},
+    {'title': 'HeidiRock', 'genre' : 'Rock', 'band' : {'Id' : 205, 'name' : 'RockWroclaw', 'noAlbums' : 0, 'origin':{'street' : 'Grunwaldzka 22', 'City' : 'Wrocław', 'State' : 'Dolnoslaskie', 'Country' : 'Poland'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Wojciech', 'SecondName' : 'Kowalski'},{'FirstName' : 'Janusz', 'SecondName' : 'Wojciechowski'}]}},
+    {'title': 'MongoPop', 'genre' : 'Pop', 'band' : {'Id' : 207, 'name' : 'NewPopYork', 'noAlbums' : 0, 'origin':{'street' : '20 W 34th Street', 'City' : 'New York', 'State' : 'New York', 'Country' : 'USA'}, 
+  'members':[{'FirstName' : 'John', 'SecondName' : 'Krasinski'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'}]}},
+    {'title': 'HeidiPop', 'genre' : 'Pop', 'band' : {'Id' : 207, 'name' : 'NewPopYork', 'noAlbums' : 0, 'origin':{'street' : '20 W 34th Street', 'City' : 'New York', 'State' : 'New York', 'Country' : 'USA'}, 
+  'members':[{'FirstName' : 'John', 'SecondName' : 'Krasinski'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'}]}},
+    {'title': 'MongoBlues', 'genre' : 'Blues', 'band' : {'Id' : 208, 'name' : 'LondonBlues', 'noAlbums' : 0, 'origin':{'street' : '10 Downing Street', 'City' : 'London', 'State' : 'Greater London', 'Country' : 'Great Britain'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Paul', 'SecondName' : 'Whitman'},{'FirstName' : 'Tom', 'SecondName' : 'Williams'},{'FirstName' : 'Harry', 'SecondName' : 'Davies'}]}},
+    {'title': 'HeidiBlues', 'genre' : 'Blues', 'band' : {'Id' : 208, 'name' : 'LondonBlues', 'noAlbums' : 0, 'origin':{'street' : '10 Downing Street', 'City' : 'London', 'State' : 'Greater London', 'Country' : 'Great Britain'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Paul', 'SecondName' : 'Whitman'},{'FirstName' : 'Tom', 'SecondName' : 'Williams'},{'FirstName' : 'Harry', 'SecondName' : 'Davies'}]}},
+    {'title': 'MongoTechno', 'genre' : 'Techno', 'band' : {'Id' : 211, 'name' : 'TechnoCairo', 'noAlbums' : 0, 'origin':{'street' : 'El-Gomhoreya Square', 'City' : 'Cairo', 'State' : 'Cairo', 'Country' : 'Egypt'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'James', 'SecondName' : 'May'}]}},
+    {'title': 'HeidiTechno', 'genre' : 'Techno', 'band' : {'Id' : 211, 'name' : 'TechnoCairo', 'noAlbums' : 0, 'origin':{'street' : 'El-Gomhoreya Square', 'City' : 'Cairo', 'State' : 'Cairo', 'Country' : 'Egypt'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'James', 'SecondName' : 'May'}]}},
+    {'title': 'MongoJazz', 'genre' : 'Jazz', 'band' : {'Id' : 212, 'name' : 'TokyoJazz', 'noAlbums' : 0, 'origin':{'street' : '1 Chome-1-2 Oshiage', 'City' : 'Tokyo', 'State' : 'Tokyo', 'Country' : 'Japan'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Jason', 'SecondName' : 'Scoth'},{'FirstName' : 'Jason', 'SecondName' : 'James'}]}},
+    {'title': 'HeidiJazz', 'genre' : 'Jazz', 'band' : {'Id' : 212, 'name' : 'TokyoJazz', 'noAlbums' : 0, 'origin':{'street' : '1 Chome-1-2 Oshiage', 'City' : 'Tokyo', 'State' : 'Tokyo', 'Country' : 'Japan'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Jason', 'SecondName' : 'Scoth'},{'FirstName' : 'Jason', 'SecondName' : 'James'}]}}];
+
+    var bands = [{'Id' : 205, 'name' : 'RockWroclaw', 'noAlbums' : 0, 'origin':{'street' : 'Grunwaldzka 22', 'City' : 'Wrocław', 'State' : 'Dolnoslaskie', 'Country' : 'Poland'}, 
+    'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Wojciech', 'SecondName' : 'Kowalski'},{'FirstName' : 'Janusz', 'SecondName' : 'Wojciechowski'}]},
+{'Id' : 207, 'name' : 'NewPopYork', 'noAlbums' : 0, 'origin':{'street' : '20 W 34th Street', 'City' : 'New York', 'State' : 'New York', 'Country' : 'USA'}, 
+  'members':[{'FirstName' : 'John', 'SecondName' : 'Krasinski'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'},{'FirstName' : 'Jason', 'SecondName' : 'Jones'}]},
+{'Id' : 208, 'name' : 'LondonBlues', 'noAlbums' : 0, 'origin':{'street' : '10 Downing Street', 'City' : 'London', 'State' : 'Greater London', 'Country' : 'Great Britain'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Paul', 'SecondName' : 'Whitman'},{'FirstName' : 'Tom', 'SecondName' : 'Williams'},{'FirstName' : 'Harry', 'SecondName' : 'Davies'}]},
+{'Id' : 209, 'name' : 'ClassicalParis', 'noAlbums' : 0, 'origin':{'street' : '5 Av. Anatole France', 'City' : 'Paris', 'State' : 'lle-de-France', 'Country' : 'France'}, 
+  'members':[{'FirstName' : 'Paul', 'SecondName' : 'Williams'}, {'FirstName' : 'Micheal', 'SecondName' : 'Scott'},{'FirstName' : 'Brian', 'SecondName' : 'Miller'},{'FirstName' : 'Erin', 'SecondName' : 'Brown'}]},
+{'Id' : 210, 'name' : 'HipHopBuenosAires', 'noAlbums' : 0, 'origin':{'street' : 'Aguero 2502', 'City' : 'Buenos Aires', 'State' : 'Buenos Aires', 'Country' : 'Brasil'}, 
+  'members':[{'FirstName' : 'Hugo', 'SecondName' : 'Barron'}, {'FirstName' : 'James', 'SecondName' : 'Smith'},{'FirstName' : 'Carlos', 'SecondName' : 'Scott'}]},
+{'Id' : 211, 'name' : 'TechnoCairo', 'noAlbums' : 0, 'origin':{'street' : 'El-Gomhoreya Square', 'City' : 'Cairo', 'State' : 'Cairo', 'Country' : 'Egypt'}, 
+  'members':[{'FirstName' : 'Patryk', 'SecondName' : 'Nowak'}, {'FirstName' : 'Paul', 'SecondName' : 'Smith'},{'FirstName' : 'James', 'SecondName' : 'May'}]},
+{'Id' : 212, 'name' : 'TokyoJazz', 'noAlbums' : 0, 'origin':{'street' : '1 Chome-1-2 Oshiage', 'City' : 'Tokyo', 'State' : 'Tokyo', 'Country' : 'Japan'}, 
+  'members':[{'FirstName' : 'Jason', 'SecondName' : 'Jones'}, {'FirstName' : 'Jason', 'SecondName' : 'Scoth'},{'FirstName' : 'Jason', 'SecondName' : 'James'}]}];
+    var seconds = Math.floor(Math.random() * 60);
+    var sec = '0';
+    if(seconds < 10)
+    {
+      sec += seconds;
+    }
+    else{
+      sec=seconds;
+    }
+    var minutes = Math.floor(Math.random() * 60);
+    var min = '0';
+    if(minutes < 10)
+    {
+      min += minutes;
+    }
+    else{
+      min=minutes;
+    }
+    var time = '00:' + min + ':'+sec;
+    var album = albums[Math.floor(Math.random()*10)];
+    //var band = bands[Math.floor(Math.random() * 7)];
+    //var words = require('an-array-of-english-words');
+    //var title = "";
+    //for(var j =0; j<5; j++){
+    //    title += words[Math.floor(Math.random()*words.length)];
+    //    title += ' ';
+    //}
+    //var titles = ['Title1','Title2','Title3'...]
+    //let titles = Array(30).fill().map(i => 'Title'+i.toString();
+    var title = 'Title'+i.toString();
+    var id = 2462
+    //console.log(time)
+    //console.log(album.band.Id,title)
+    db.songs.insertOne({'Id': id+i, 'title':title, 'album':album,'band':album.band, 'length':time})
+
+}*/
+
+//6
+//console.log(db.getCollectionNames())
+
+//7
+//var album_count = db.albums.aggregate([{"$group" : {'_id' : "$band", count:{$sum:1}}}]).toArray();
+
+//8
+/*album_count.forEach(x =>
+{if(typeof x._id.Id !== 'undefined') {db.bands.updateOne({'Id' : x._id.Id}, {$set:{'noAlbums' : x.count}})} 
+else console.log(x._id, x.count)})//{db.bands.updateOne({'Id':x._id}, {$set:{'noAlbums':x.count}})}});
+*/
+
+//9
+//var delete_bands = db.bands.find({'members.FirstName' : 'John'})
+//delete_bands.forEach(x => {db.bands.deleteOne({'Id' : x.Id})})
+
+//10 OGARNĄĆ
+//var rockalbums = db.albums.find({'genre' : 'Rock'})
+//rockalbums.forEach(x=> {if(typeof x.band.Id !== 'undefined') {db.songs.find({'album' : x.title})}})
+//else {db.songs.find('album' : x.title)})
+
+//11
+//db.albums.aggregate([{$group : {'_id' :  "$genre", count:{$sum:1}}}, {$match : {'count' : {'$gte' : 7} }}]).toArray()
+
+//12
+//db.songs.deleteMany({'title':null})
+//db.songs.aggregate({$group: {'_id' : '$band', count:{$sum:1}}}, {$sort: {"count":-1}}).toArray()
+//db.songs.aggregate([{$group: {'_id' : '$band', count:{$sum:1}}},{$group:{'_id':'$band','count':{$max:'$count'}}}]).toArray()
+//var band = db.songs.aggregate([{$group: {'_id' : '$band', count:{$sum:1}}},{$sort : {count : -1}},{$limit : 1}]).toArray()
+//db.bands.find({'Id':band._id}).pretty()
+
+
+//13
+/*
+toSeconds = function(length){
+   if(!length.toString().includes(':')){
+    return length
+  }
+  else {
+    var a = length.split(':');
+    var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]); 
+    return seconds;
+  }
+}
+var songs = db.songs.find().toArray();
+songs.forEach(x=> {if(typeof x != "number") {x.length = toSeconds(x.length+' ')}})
+var sorted_songs = songs.sort((x,y) => (x.length)-(y.length))
+var min_song = sorted_songs[sorted_songs.length-1]
+var max_song = sorted_songs[0]
+console.log(max_song.title, max_song.length,min_song.title, min_song.length)
+*/
+
+//14
+/*
+toSeconds = function(length){
+   if(!length.toString().includes(':')){
+    return length
+  }
+  else {
+    var a = length.split(':');
+    var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]); 
+    return seconds;
+  }
+}
+
+function groupBy(arr, criteria) {
+  const newObj = arr.reduce(function (acc, currentValue) {
+    if (!acc[currentValue[criteria]]) {
+      acc[currentValue[criteria]] = [];
+    }
+    acc[currentValue[criteria]].push(currentValue);
+    return acc;
+  }, {});
+  return newObj;
+}
+
+var songs = db.songs.find().toArray();
+songs.forEach(x=> {if(typeof x != "number") {x.length = toSeconds(x.length+' ')}})
+var albums = groupBy(songs, "album")
+
+*/
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+
+
+// Insert a few documents into the sales collection.
+/*db.sales.insertMany([
+  { '_id': 1, 'item': 'abc', 'price': 10, 'quantity': 2, 'date': new Date('2014-03-01T08:00:00Z') },
+  { '_id': 2, 'item': 'jkl', 'price': 20, 'quantity': 1, 'date': new Date('2014-03-01T09:00:00Z') },
+  { '_id': 3, 'item': 'xyz', 'price': 5, 'quantity': 10, 'date': new Date('2014-03-15T09:00:00Z') },
+  { '_id': 4, 'item': 'xyz', 'price': 5, 'quantity':  20, 'date': new Date('2014-04-04T11:21:39.736Z') },
+  { '_id': 5, 'item': 'abc', 'price': 10, 'quantity': 10, 'date': new Date('2014-04-04T21:23:13.331Z') },
+  { '_id': 6, 'item': 'def', 'price': 7.5, 'quantity': 5, 'date': new Date('2015-06-04T05:08:13Z') },
+  { '_id': 7, 'item': 'def', 'price': 7.5, 'quantity': 10, 'date': new Date('2015-09-10T08:43:00Z') },
+  { '_id': 8, 'item': 'abc', 'price': 10, 'quantity': 5, 'date': new Date('2016-02-06T20:20:13Z') },
+]);*/
+
+// Run a find command to view items sold on April 4th, 2014.
+//db.sales.find({ date: { $gte: new Date('2014-04-04'), $lt: new Date('2014-04-05') } });
+
+// Build an aggregation to view total sales for each product in 2014.
+//const aggregation = [
+//  { $match: { date: { $gte: new Date('2014-01-01'), $lt: new Date('2015-01-01') } } },
+//  { $group: { _id: '$item', totalSaleAmount: { $sum: { $multiply: [ '$price', '$quantity' ] } } } }
+//];
+
+// Run the aggregation and open a cursor to the results.
+// Use toArray() to exhaust the cursor to return the whole result set.
+// You can use hasNext()/next() to iterate through the cursor page by page.
+//db.sales.aggregate(aggregation);

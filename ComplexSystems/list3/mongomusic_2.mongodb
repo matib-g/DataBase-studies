@@ -1,0 +1,243 @@
+use("MongoMusic")
+
+//k=0
+function to_secodns(length){
+    if(typeof length === 'string'||length instanceof String){
+        let split = length.split(':')
+        return parseInt(split[0])*3600+parseInt(split[1])*60+parseInt(split[2])
+    }else{
+        return length
+    }
+}
+
+var avg_len = db.songs.aggregate([
+
+    {
+        $lookup: {
+        from: 'bands',
+        localField: 'band',
+        foreignField: 'id',
+        as: 'b'
+        }
+    },
+    {
+        $addFields: {
+          'len':{
+              $function:
+              {
+                  body:function to_secodns(length){
+                            if(typeof length === 'string'||length instanceof String){
+                                let split = length.split(':')
+                                return parseInt(split[0])*3600+parseInt(split[1])*60+parseInt(split[2])
+                            }else{
+                                return length
+                            }
+                        },
+                    args:["$length"],
+                    lang:'js'
+              }
+          }
+        }
+    },
+    {
+         //query: The query in MQL.
+        $match: {
+          'b.name':'U2'
+        }
+    },
+    {
+        $group: {
+          _id: "$b.name",
+          avg_len: {
+            "$avg": "$len"
+          }
+        }
+    }
+
+]).toArray()[0]['avg_len']
+
+db.songs.aggregate([
+    {
+        $lookup: {
+        from: 'bands',
+        localField: 'band',
+        foreignField: 'id',
+        as: 'b'
+        }
+    },
+    {
+        $addFields: {
+          'len':{
+              $function:
+              {
+                  body:function to_secodns(length){
+                            if(typeof length === 'string'||length instanceof String){
+                                let split = length.split(':')
+                                return parseInt(split[0])*3600+parseInt(split[1])*60+parseInt(split[2])
+                            }else{
+                                return length
+                            }
+                        },
+                    args:["$length"],
+                    lang:'js'
+              }
+          }
+        }
+    },
+    {
+        $match: {
+          'b.name':'U2',
+          'len':{$gte:avg_len}
+
+        }
+    },
+    {
+        $project: {
+          'title':true,
+          '_id':false
+        }
+    }
+])
+
+
+//k=1
+db.songs.aggregate([
+    {
+        $lookup: {
+          from: 'albums',
+          localField: 'album',
+          foreignField: 'title',
+          as: 'album2'
+        }
+    },{
+        $match: {
+          'album2.genre':'Rock'
+        }
+    },
+    {
+        $addFields: {
+          'len':{
+              $function:
+              {
+                  body:function to_secodns(length){
+                            if(typeof length === 'string'||length instanceof String){
+                                let split = length.split(':')
+                                return parseInt(split[0])*3600+parseInt(split[1])*60+parseInt(split[2])
+                            }else{
+                                return length
+                            }
+                        },
+                    args:["$length"],
+                    lang:'js'
+              }
+          }
+        }
+    },
+    {
+        $sort: {
+          'len': -1
+        }
+    },
+    {
+        $project: {
+          'album':true
+        }
+    },
+    {
+        $limit: 1
+    }
+])
+
+//k=2
+let jazz_len = db.songs.aggregate([
+    {
+        /**
+         * from: The target collection.
+         * localField: The local join field.
+         * foreignField: The target join field.
+         * as: The name for the results.
+         * pipeline: The pipeline to run on the joined collection.
+         * let: Optional variables to use in the pipeline field stages.
+         */
+        $lookup: {
+          from: 'albums',
+          localField: 'album',
+          foreignField: 'title',
+          as: 'album2'
+        }
+    },{
+        /**
+         * query: The query in MQL.
+         */
+        $match: {
+          'album2.genre':'Jazz'
+        }
+    },
+    {
+        $addFields: {
+          'len':{
+              $function:
+              {
+                  body:function to_secodns(length){
+                            if(typeof length === 'string'||length instanceof String){
+                                let split = length.split(':')
+                                return parseInt(split[0])*3600+parseInt(split[1])*60+parseInt(split[2])
+                            }else{
+                                return length
+                            }
+                        },
+                    args:["$length"],
+                    lang:'js'
+              }
+          }
+        }
+    },
+    {
+        /**
+         * Provide any number of field/order pairs.
+         */
+        $sort: {
+          'len': 1
+        }
+    },
+    {
+        /**
+         * Provide the number of documents to limit.
+         */
+        $limit: 1
+    }
+]).toArray()[0]['len']
+print(jazz_len)
+
+db.songs.aggregate([
+     {
+        $addFields: {
+          'len':{
+              $function:
+              {
+                  body:function to_secodns(length){
+                            if(typeof length === 'string'||length instanceof String){
+                                let split = length.split(':')
+                                return parseInt(split[0])*3600+parseInt(split[1])*60+parseInt(split[2])
+                            }else{
+                                return length
+                            }
+                        },
+                    args:["$length"],
+                    lang:'js'
+              }
+          }
+        }
+    },
+    {
+        /**
+         * query: The query in MQL.
+         */
+        $match: {
+          'len':{$lt:jazz_len}
+        }
+    }
+]).map(function(d){
+    return d._id
+}
+)

@@ -1,0 +1,39 @@
+use("MongoMusic")
+
+ var ids = db.songs.aggregate([
+    {
+        $addFields: {
+          'len':{
+              $function:
+              {
+                  body:function to_secodns(length){
+                            if(typeof length === 'string'||length instanceof String){
+                                return parseInt(length.split(':')[0])*3600+parseInt(length.split(':')[1])*60+parseInt(length.split(':')[2])
+                            }else{
+                                return length
+                            }
+                        },
+                    args:["$length"],
+                    lang:'js'
+              }
+          }
+        }
+    },
+    {
+        $lookup: {
+          from: 'albums',
+          localField: 'album',
+          foreignField: 'title',
+          as: 'a'
+        }
+    },{
+        $match: {
+          'a.genre':'Jazz',
+           'len':{$gt:180}
+        }
+    }
+]).map(function(d){
+    return d._id
+}
+)
+db.songs.deleteMany({_id:{$in:ids}})
